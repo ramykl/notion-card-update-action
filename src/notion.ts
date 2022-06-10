@@ -1,5 +1,5 @@
-import {Client} from '@notionhq/client'
 import * as core from '@actions/core'
+import {Client} from '@notionhq/client'
 
 const updateCard = async (pageId: string, key: string, value: string) => {
   core.info(process.env.NOTION_KEY || '')
@@ -8,7 +8,7 @@ const updateCard = async (pageId: string, key: string, value: string) => {
     auth: process.env.NOTION_KEY
   })
   let response = await notion.pages.retrieve({
-    page_id: pageId,
+    page_id: pageId
   })
   console.log(JSON.stringify(response))
   core.info(JSON.stringify(response))
