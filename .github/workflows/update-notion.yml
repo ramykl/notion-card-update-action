@@ -12,7 +12,6 @@ jobs:
       - name: Update card status with PR progression
         uses: ramykl/notion-card-update-action
         id: update-card
-        continue-on-error: true
         with:
           page_property: 'Status'
           on_pr: 'In progress'
