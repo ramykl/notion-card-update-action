@@ -8,7 +8,7 @@ const getIdFromUrl: (page: string) => string = (page: string) => {
 
 const extractNotionLink: (body: string) => string = (body: string) => {
   const markdownRegex = new RegExp(
-    `(https?://)?(www.notion.so|notion.so)/?[^(\s)]+`
+    `(https?://)?(www.notion.so|notion.so)/?[^(\s)]+`, 'g'
   )
   const results = [...body.matchAll(markdownRegex)]
 
