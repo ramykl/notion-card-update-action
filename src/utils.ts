@@ -1,13 +1,14 @@
-import {OnMerge, OnPR} from './constants'
 import * as core from '@actions/core'
 
-const getIdFromUrl = (page: string) => {
+import {OnMerge, OnPR} from './constants'
+
+const getIdFromUrl: (page: string) => string = (page: string) => {
   return page.slice(-32)
 }
 
-const extractNotionLink = (body: string) => {
+const extractNotionLink: (body: string) => string = (body: string) => {
   const markdownRegex = new RegExp(
-    `(https?://)?(www\.notion\.so|notion\.so)/?[^(\s)]+`
+    `(https?://)?(www.notion.so|notion.so)/?[^(\s)]+`
   )
   const results = [...body.matchAll(markdownRegex)]
 
@@ -20,7 +21,10 @@ const extractNotionLink = (body: string) => {
   return results[0][0]
 }
 
-const valueFromEvent = (merged: boolean, closed: boolean) => {
+const valueFromEvent: (merged: boolean, closed: boolean) => string = (
+  merged: boolean,
+  closed: boolean
+) => {
   if (!merged && !closed) {
     return core.getInput(OnPR)
   } else if (merged && closed) {
@@ -30,4 +34,8 @@ const valueFromEvent = (merged: boolean, closed: boolean) => {
   }
 }
 
-export {getIdFromUrl, extractNotionLink, valueFromEvent}
+export {
+  getIdFromUrl,
+  extractNotionLink,
+  valueFromEvent
+}

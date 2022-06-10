@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": false,
   "description": "Typescript action to update notion cards",
-  "main": "src/main.ts",
+  "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
     "format": "prettier --write '**/*.ts'",
@@ -11,7 +11,7 @@
     "lint": "eslint src/**/*.ts",
     "package": "ncc build --source-map --license licenses.txt",
     "test": "jest",
-    "all": "npm run build && npm run format && npm run lint && npm run package && npm test",
+    "all": "npm run build && npm run format && npm run lint && npm run package",
     "prepare": "husky install"
   },
   "repository": {

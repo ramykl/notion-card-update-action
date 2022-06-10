@@ -1,13 +1,12 @@
-const PageProperty: string = "page_property"
-const OnPR: string = "on_pr"
-const OnMerge: string = "on_merge"
+const PageProperty = 'page_property'
+const OnPR = 'on_pr'
+const OnMerge = 'on_merge'
 
-const InputPagePropertyDefault: string = "Status"
-const InputOnPRDefault: string = "In progress"
+const InputPagePropertyDefault = 'Status'
+const InputOnPRDefault = 'In progress'
 
-const CardStatusInProgress: string = "In progress"
-const CardStatusDone: string = "Done"
-
+const CardStatusInProgress = 'In progress'
+const CardStatusDone = 'Done'
 
 export {
   PageProperty,

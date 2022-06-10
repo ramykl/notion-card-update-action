@@ -1,8 +1,9 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
+
+import {PageProperty} from './constants'
+import {updateCard} from './notion'
 import {extractNotionLink, getIdFromUrl, valueFromEvent} from './utils'
-import {updateCard} from "./notion";
-import {PageProperty} from "./constants";
 
 async function run(): Promise<void> {
   try {
