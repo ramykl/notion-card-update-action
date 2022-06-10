@@ -6,9 +6,11 @@ const getIdFromUrl: (page: string) => string = (page: string) => {
   return page.slice(-32)
 }
 
-const extractNotionLink: (body: string) => string = (body: string) => {
+const extractNotionLinks: (body: string) => RegExpMatchArray[] = (
+  body: string
+) => {
   const markdownRegex = new RegExp(
-    `(https?://)?(www.notion.so|notion.so)/?[^(\s)]+`,
+    `(https?://)?(www.notion.so|notion.so)/?[^(s)]+`,
     'g'
   )
   const results = [...body.matchAll(markdownRegex)]
@@ -16,10 +18,13 @@ const extractNotionLink: (body: string) => string = (body: string) => {
   if (results.length < 1) {
     console.error('No Notion URL was found')
   } else if (results.length >= 1) {
-    console.log('First URL matched was:', results[0][0])
+    for (const match of results) {
+      const index = results.indexOf(match)
+      console.log(`${index} URL matched was: ${match[0]}`)
+    }
   }
 
-  return results[0][0]
+  return results
 }
 
 const valueFromEvent: (merged: boolean, closed: boolean) => string = (
@@ -35,15 +40,19 @@ const valueFromEvent: (merged: boolean, closed: boolean) => string = (
   }
 }
 
-const notionTypeToPropValue: (type: string, value: string) => any = (type, value) => {
+const notionTypeToPropValue: (type: string, value: string) => {} = (
+  type,
+  value
+) => {
   switch (type) {
     case 'select': {
       return {[type]: {name: value}}
     }
-    case 'checkbox': {
+    case 'checkbox':
+    default: {
       return {[type]: value}
     }
   }
 }
 
-export {getIdFromUrl, extractNotionLink, valueFromEvent, notionTypeToPropValue}
+export {getIdFromUrl, extractNotionLinks, valueFromEvent, notionTypeToPropValue}

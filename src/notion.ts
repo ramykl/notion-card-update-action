@@ -1,19 +1,34 @@
 import * as core from '@actions/core'
 import {Client} from '@notionhq/client'
 
-const updateCard = async (pageId: string, key: string, value: string) => {
+import {PagePropertyType} from './constants'
+import {notionTypeToPropValue} from './utils'
+
+const updateCard: (
+  pageId: string,
+  key: string,
+  type: string,
+  value: string
+) => void = async (
+  pageId: string,
+  key: string,
+  type: string,
+  value: string
+) => {
   core.info(process.env.NOTION_KEY || '')
   // Initializing a client
   const notion = new Client({
     auth: process.env.NOTION_KEY
   })
-  let response = await notion.pages.retrieve({
+  const response = await notion.pages.retrieve({
     page_id: pageId
   })
   console.log(JSON.stringify(response))
   await notion.pages.update({
     page_id: pageId,
-    properties: {[key]: value}
+    properties: {
+      [key]: notionTypeToPropValue(core.getInput(PagePropertyType), value)
+    } as never
   })
   console.log(`${key} was successfully updated to ${value}`)
 }
