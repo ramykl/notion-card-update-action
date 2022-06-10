@@ -12,12 +12,12 @@ const updateCard = async (pageId: string, key: string, value: string) => {
   })
   console.log(JSON.stringify(response))
   core.info(JSON.stringify(response))
-  response = await notion.pages.update({
-    page_id: pageId,
-    properties: {[key]: value}
-  })
-  core.info(`${key} was successfully updated to ${value}`)
-  core.info(JSON.stringify(response))
+  // response = await notion.pages.update({
+  //   page_id: pageId,
+  //   properties: {[key]: value}
+  // })
+  // core.info(`${key} was successfully updated to ${value}`)
+  // core.info(JSON.stringify(response))
 }
 
 export {updateCard}
