@@ -1,6 +1,7 @@
 import {Client} from '@notionhq/client'
 
 const updateCard = async (pageId: string, key: string, value: string) => {
+  console.log(process.env.NOTION_KEY)
   // Initializing a client
   const notion = new Client({
     auth: process.env.NOTION_KEY
