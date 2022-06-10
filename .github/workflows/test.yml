@@ -20,5 +20,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ./
+        id: update-card
+        continue-on-error: true
         with:
-          milliseconds: 1000
+          page_property: 'Status'
+          on_pr: 'In progress'
+          on_merge: 'Done'
+        env:
+          NOTION_KEY: ${{ secrets.NOTION_GITHUB_INTEGRATION_KEY }}
