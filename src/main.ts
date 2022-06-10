@@ -1,9 +1,9 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
 
-import {PageProperty} from './constants'
+import {PageProperty, PagePropertyType} from './constants'
 import {updateCard} from './notion'
-import {extractNotionLink, getIdFromUrl, valueFromEvent} from './utils'
+import {extractNotionLink, getIdFromUrl, notionTypeToPropValue, valueFromEvent} from './utils'
 
 async function run(): Promise<void> {
   try {
@@ -15,7 +15,7 @@ async function run(): Promise<void> {
 
     const url = extractNotionLink(body || '')
     const pageId = getIdFromUrl(url)
-    await updateCard(pageId, core.getInput(PageProperty), value)
+    await updateCard(pageId, core.getInput(PageProperty), notionTypeToPropValue(core.getInput(PagePropertyType), value))
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message)
   }

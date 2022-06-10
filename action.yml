@@ -9,6 +9,10 @@ inputs:
     description: 'The name of the property to update. Default is "Status"'
     required: false
     default: 'Status'
+  page_property_type:
+    description: 'The notion type of the property to update. Default is "select"'
+    required: false
+    default: 'select'
   on_pr:
     description: 'The value of page-property to be updated on PR event. Default is "In progress"'
     required: false

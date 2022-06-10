@@ -23,8 +23,8 @@ const extractNotionLink: (body: string) => string = (body: string) => {
 }
 
 const valueFromEvent: (merged: boolean, closed: boolean) => string = (
-  merged: boolean,
-  closed: boolean
+  merged,
+  closed
 ) => {
   if (!merged && !closed) {
     return core.getInput(OnPR)
@@ -35,4 +35,15 @@ const valueFromEvent: (merged: boolean, closed: boolean) => string = (
   }
 }
 
-export {getIdFromUrl, extractNotionLink, valueFromEvent}
+const notionTypeToPropValue: (type: string, value: string) => any = (type, value) => {
+  switch (type) {
+    case 'select': {
+      return {[type]: {name: value}}
+    }
+    case 'checkbox': {
+      return {[type]: value}
+    }
+  }
+}
+
+export {getIdFromUrl, extractNotionLink, valueFromEvent, notionTypeToPropValue}
