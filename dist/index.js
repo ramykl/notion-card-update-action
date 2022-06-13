@@ -7,20 +7,24 @@ require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.CardStatusDone = exports.CardStatusInProgress = exports.InputOnPRDefault = exports.InputPagePropertyDefault = exports.OnMerge = exports.OnPR = exports.PageProperty = void 0;
-const PageProperty = "page_property";
+exports.CardStatusDone = exports.CardStatusInProgress = exports.InputOnPRDefault = exports.InputPagePropertyTypeDefault = exports.InputPagePropertyDefault = exports.OnMerge = exports.OnPR = exports.PagePropertyType = exports.PageProperty = void 0;
+const PageProperty = 'page_property';
 exports.PageProperty = PageProperty;
-const OnPR = "on_pr";
+const PagePropertyType = 'page_property_type';
+exports.PagePropertyType = PagePropertyType;
+const OnPR = 'on_pr';
 exports.OnPR = OnPR;
-const OnMerge = "on_merge";
+const OnMerge = 'on_merge';
 exports.OnMerge = OnMerge;
-const InputPagePropertyDefault = "Status";
+const InputPagePropertyDefault = 'Status';
 exports.InputPagePropertyDefault = InputPagePropertyDefault;
-const InputOnPRDefault = "In progress";
+const InputPagePropertyTypeDefault = 'select';
+exports.InputPagePropertyTypeDefault = InputPagePropertyTypeDefault;
+const InputOnPRDefault = 'In progress';
 exports.InputOnPRDefault = InputOnPRDefault;
-const CardStatusInProgress = "In progress";
+const CardStatusInProgress = 'In progress';
 exports.CardStatusInProgress = CardStatusInProgress;
-const CardStatusDone = "Done";
+const CardStatusDone = 'Done';
 exports.CardStatusDone = CardStatusDone;
 
 
@@ -66,9 +70,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
-const utils_1 = __nccwpck_require__(918);
-const notion_1 = __nccwpck_require__(8605);
 const constants_1 = __nccwpck_require__(5105);
+const notion_1 = __nccwpck_require__(8605);
+const utils_1 = __nccwpck_require__(918);
 function run() {
     var _a, _b;
     return __awaiter(this, void 0, void 0, function* () {
@@ -78,9 +82,12 @@ function run() {
             const closed = payload.action === 'closed';
             const merged = (_b = payload.pull_request) === null || _b === void 0 ? void 0 : _b.merged;
             const value = (0, utils_1.valueFromEvent)(merged, closed);
-            const url = (0, utils_1.extractNotionLink)(body || '');
-            const pageId = (0, utils_1.getIdFromUrl)(url);
-            yield (0, notion_1.updateCard)(pageId, core.getInput(constants_1.PageProperty), value);
+            const urls = (0, utils_1.extractNotionLinks)(body || '');
+            const promises = urls.map(match => {
+                const pageId = (0, utils_1.getIdFromUrl)(match[0]);
+                return (0, notion_1.updateCard)(pageId, core.getInput(constants_1.PageProperty), core.getInput(constants_1.PagePropertyType), value);
+            });
+            yield Promise.all(promises);
         }
         catch (error) {
             if (error instanceof Error)
@@ -98,6 +105,29 @@ run();
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -109,18 +139,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.updateCard = void 0;
+const core = __importStar(__nccwpck_require__(2186));
 const client_1 = __nccwpck_require__(324);
-const updateCard = (pageId, key, value) => __awaiter(void 0, void 0, void 0, function* () {
+const constants_1 = __nccwpck_require__(5105);
+const utils_1 = __nccwpck_require__(918);
+const updateCard = (pageId, key, type, value) => __awaiter(void 0, void 0, void 0, function* () {
+    core.info(process.env.NOTION_KEY || '');
     // Initializing a client
     const notion = new client_1.Client({
         auth: process.env.NOTION_KEY
     });
-    const response = yield notion.pages.update({
+    const response = yield notion.pages.retrieve({
+        page_id: pageId
+    });
+    console.log(JSON.stringify(response));
+    yield notion.pages.update({
         page_id: pageId,
-        properties: { [key]: value }
+        properties: {
+            [key]: (0, utils_1.notionTypeToPropValue)(core.getInput(constants_1.PagePropertyType), value)
+        }
     });
     console.log(`${key} was successfully updated to ${value}`);
-    console.log(response);
 });
 exports.updateCard = updateCard;
 
@@ -156,25 +195,28 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.valueFromEvent = exports.extractNotionLink = exports.getIdFromUrl = void 0;
-const constants_1 = __nccwpck_require__(5105);
+exports.notionTypeToPropValue = exports.valueFromEvent = exports.extractNotionLinks = exports.getIdFromUrl = void 0;
 const core = __importStar(__nccwpck_require__(2186));
+const constants_1 = __nccwpck_require__(5105);
 const getIdFromUrl = (page) => {
     return page.slice(-32);
 };
 exports.getIdFromUrl = getIdFromUrl;
-const extractNotionLink = (body) => {
-    const markdownRegex = new RegExp(`(https?://)?(www\.notion\.so|notion\.so)/?[^(\s)]+`);
+const extractNotionLinks = (body) => {
+    const markdownRegex = new RegExp(`(https?://)?(www.notion.so|notion.so)/?[^(s)]+`, 'g');
     const results = [...body.matchAll(markdownRegex)];
     if (results.length < 1) {
         console.error('No Notion URL was found');
     }
     else if (results.length >= 1) {
-        console.log('First URL matched was:', results[0][0]);
+        for (const match of results) {
+            const index = results.indexOf(match);
+            console.log(`${index} URL matched was: ${match[0]}`);
+        }
     }
-    return results[0][0];
+    return results;
 };
-exports.extractNotionLink = extractNotionLink;
+exports.extractNotionLinks = extractNotionLinks;
 const valueFromEvent = (merged, closed) => {
     if (!merged && !closed) {
         return core.getInput(constants_1.OnPR);
@@ -187,6 +229,18 @@ const valueFromEvent = (merged, closed) => {
     }
 };
 exports.valueFromEvent = valueFromEvent;
+const notionTypeToPropValue = (type, value) => {
+    switch (type) {
+        case 'select': {
+            return { [type]: { name: value } };
+        }
+        case 'checkbox':
+        default: {
+            return { [type]: value };
+        }
+    }
+};
+exports.notionTypeToPropValue = notionTypeToPropValue;
 
 
 /***/ }),
