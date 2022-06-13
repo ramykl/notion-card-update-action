@@ -23,6 +23,7 @@ jobs:
         id: update-card
         with:
           page_property: 'Status'
+          page_property_type: 'select'
           on_pr: 'In progress'
           on_merge: 'Done'
         env:
