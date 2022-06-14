@@ -82,12 +82,10 @@ function run() {
             console.log(JSON.stringify(payload.action));
             const closed = payload.action === 'closed';
             const merged = (_b = payload.pull_request) === null || _b === void 0 ? void 0 : _b.merged;
-            console.log(closed, merged);
             const value = (0, utils_1.valueFromEvent)(merged, closed);
             const urls = (0, utils_1.extractNotionLinks)(body || '');
             const promises = urls.map(match => {
                 const pageId = (0, utils_1.getIdFromUrl)(match[0]);
-                console.log(`id: ${pageId}`);
                 return (0, notion_1.updateCard)(pageId, core.getInput(constants_1.PageProperty), core.getInput(constants_1.PagePropertyType), value);
             });
             yield Promise.all(promises);
@@ -152,21 +150,17 @@ const updateCard = (pageId, key, type, value) => __awaiter(void 0, void 0, void 
     const notion = new client_1.Client({
         auth: process.env.NOTION_KEY
     });
-    const response = yield notion.pages.retrieve({
-        page_id: pageId
-    });
-    console.log(JSON.stringify(response));
-    console.log(key, core.getInput(constants_1.PagePropertyType), value);
-    console.log(JSON.stringify({
-        [key]: (0, utils_1.notionTypeToPropValue)(core.getInput(constants_1.PagePropertyType), value)
-    }));
+    // const response = await notion.pages.retrieve({
+    //   page_id: pageId
+    // })
+    // console.log(JSON.stringify(response))
     yield notion.pages.update({
         page_id: pageId,
         properties: {
             [key]: (0, utils_1.notionTypeToPropValue)(core.getInput(constants_1.PagePropertyType), value)
         }
     });
-    console.log(`${key} was successfully updated to ${value}`);
+    console.log(`${key} was successfully updated to ${value} on page ${pageId}`);
 });
 exports.updateCard = updateCard;
 

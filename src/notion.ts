@@ -20,23 +20,17 @@ const updateCard: (
   const notion = new Client({
     auth: process.env.NOTION_KEY
   })
-  const response = await notion.pages.retrieve({
-    page_id: pageId
-  })
-  console.log(JSON.stringify(response))
-  console.log(key, core.getInput(PagePropertyType), value)
-  console.log(
-    JSON.stringify({
-      [key]: notionTypeToPropValue(core.getInput(PagePropertyType), value)
-    } as never)
-  )
+  // const response = await notion.pages.retrieve({
+  //   page_id: pageId
+  // })
+  // console.log(JSON.stringify(response))
   await notion.pages.update({
     page_id: pageId,
     properties: {
       [key]: notionTypeToPropValue(core.getInput(PagePropertyType), value)
     } as never
   })
-  console.log(`${key} was successfully updated to ${value}`)
+  console.log(`${key} was successfully updated to ${value} on page ${pageId}`)
 }
 
 export {updateCard}

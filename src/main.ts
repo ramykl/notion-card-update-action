@@ -12,13 +12,11 @@ async function run(): Promise<void> {
     console.log(JSON.stringify(payload.action))
     const closed = payload.action === 'closed'
     const merged = payload.pull_request?.merged
-    console.log(closed, merged)
     const value = valueFromEvent(merged, closed)
 
     const urls = extractNotionLinks(body || '')
     const promises = urls.map(match => {
       const pageId = getIdFromUrl(match[0])
-      console.log(`id: ${pageId}`)
       return updateCard(
         pageId,
         core.getInput(PageProperty),
