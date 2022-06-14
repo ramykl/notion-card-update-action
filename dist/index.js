@@ -211,7 +211,9 @@ const extractNotionLinks = (body) => {
     else if (results.length >= 1) {
         for (const match of results) {
             const index = results.indexOf(match);
+            console.log(match);
             console.log(`${index} URL matched was: ${match[0]}`);
+            console.log(`id: ${match[0][0]}`);
         }
     }
     return results;
