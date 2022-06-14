@@ -79,6 +79,7 @@ function run() {
         try {
             const payload = github.context.payload;
             const body = (_a = payload.pull_request) === null || _a === void 0 ? void 0 : _a.body;
+            console.log(JSON.stringify(payload));
             const closed = payload.action === 'closed';
             const merged = (_b = payload.pull_request) === null || _b === void 0 ? void 0 : _b.merged;
             const value = (0, utils_1.valueFromEvent)(merged, closed);
