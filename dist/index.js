@@ -85,6 +85,7 @@ function run() {
             const urls = (0, utils_1.extractNotionLinks)(body || '');
             const promises = urls.map(match => {
                 const pageId = (0, utils_1.getIdFromUrl)(match[0]);
+                console.log(`id: ${pageId}`);
                 return (0, notion_1.updateCard)(pageId, core.getInput(constants_1.PageProperty), core.getInput(constants_1.PagePropertyType), value);
             });
             yield Promise.all(promises);
@@ -211,9 +212,7 @@ const extractNotionLinks = (body) => {
     else if (results.length >= 1) {
         for (const match of results) {
             const index = results.indexOf(match);
-            console.log(match);
             console.log(`${index} URL matched was: ${match[0]}`);
-            console.log(`id: ${match[0][0]}`);
         }
     }
     return results;
