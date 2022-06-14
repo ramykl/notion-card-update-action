@@ -82,6 +82,7 @@ function run() {
             console.log(JSON.stringify(payload));
             const closed = payload.action === 'closed';
             const merged = (_b = payload.pull_request) === null || _b === void 0 ? void 0 : _b.merged;
+            console.log(closed, merged);
             const value = (0, utils_1.valueFromEvent)(merged, closed);
             const urls = (0, utils_1.extractNotionLinks)(body || '');
             const promises = urls.map(match => {

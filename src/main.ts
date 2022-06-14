@@ -12,6 +12,7 @@ async function run(): Promise<void> {
     console.log(JSON.stringify(payload))
     const closed = payload.action === 'closed'
     const merged = payload.pull_request?.merged
+    console.log(closed, merged)
     const value = valueFromEvent(merged, closed)
 
     const urls = extractNotionLinks(body || '')
