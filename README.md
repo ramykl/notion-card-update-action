@@ -52,3 +52,5 @@ jobs:
         env:
           NOTION_KEY: ---
 ```
+
+This was inspired by https://github.com/zant/notion-cards-action
