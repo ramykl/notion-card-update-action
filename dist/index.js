@@ -154,6 +154,10 @@ const updateCard = (pageId, key, type, value) => __awaiter(void 0, void 0, void 
         page_id: pageId
     });
     console.log(JSON.stringify(response));
+    console.log(key, core.getInput(constants_1.PagePropertyType), value);
+    console.log(JSON.stringify({
+        [key]: (0, utils_1.notionTypeToPropValue)(core.getInput(constants_1.PagePropertyType), value)
+    }));
     yield notion.pages.update({
         page_id: pageId,
         properties: {

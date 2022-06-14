@@ -24,6 +24,12 @@ const updateCard: (
     page_id: pageId
   })
   console.log(JSON.stringify(response))
+  console.log(key, core.getInput(PagePropertyType), value)
+  console.log(
+    JSON.stringify({
+      [key]: notionTypeToPropValue(core.getInput(PagePropertyType), value)
+    } as never)
+  )
   await notion.pages.update({
     page_id: pageId,
     properties: {
