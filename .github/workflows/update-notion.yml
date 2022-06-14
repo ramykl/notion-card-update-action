@@ -2,7 +2,7 @@ name: Update notion page
 
 on:
   pull_request:
-    types: [opened, closed]
+    types: [reopened, opened, closed]
 
 jobs:
   update_card:

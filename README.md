@@ -36,7 +36,7 @@ name: Update notion card
 
 on:
   pull_request:
-    types: [opened, closed]
+    types: [reopened, opened, closed]
 
 jobs:
   update_card:
@@ -47,6 +47,7 @@ jobs:
         uses: ramykl/notion-card-update-action@main
         with:
           page_property: 'Status'
+          page_property_type: 'select'
           on_pr: 'In progress'
           on_merge: 'Done'
         env:
