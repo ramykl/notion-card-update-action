@@ -9,7 +9,7 @@ async function run(): Promise<void> {
   try {
     const payload = github.context.payload
     const body = payload.pull_request?.body
-    console.log(JSON.stringify(payload.pull_request))
+    console.log(JSON.stringify(payload.action))
     const closed = payload.action === 'closed'
     const merged = payload.pull_request?.merged
     console.log(closed, merged)
