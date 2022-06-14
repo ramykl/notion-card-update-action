@@ -22,6 +22,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: install dos2unix
+        run: apt-get install dos2unix
 
       - name: Set Node.js 16.x
         uses: actions/setup-node@v3.3.0
