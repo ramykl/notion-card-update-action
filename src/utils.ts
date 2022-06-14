@@ -10,7 +10,7 @@ const extractNotionLinks: (body: string) => RegExpMatchArray[] = (
   body: string
 ) => {
   const markdownRegex = new RegExp(
-    `(https?://)?(www.notion.so|notion.so)/?[^(\\s)]+`,
+    `(https?://)?(www.notion.so|notion.so)/?[^(\s)]+`,
     'g'
   )
   const results = [...body.matchAll(markdownRegex)]

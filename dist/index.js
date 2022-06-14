@@ -203,7 +203,7 @@ const getIdFromUrl = (page) => {
 };
 exports.getIdFromUrl = getIdFromUrl;
 const extractNotionLinks = (body) => {
-    const markdownRegex = new RegExp(`(https?://)?(www.notion.so|notion.so)/?[^(s)]+`, 'g');
+    const markdownRegex = new RegExp(`(https?://)?(www.notion.so|notion.so)/?[^(\s)]+`, 'g');
     const results = [...body.matchAll(markdownRegex)];
     if (results.length < 1) {
         console.error('No Notion URL was found');
