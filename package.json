@@ -1,41 +1,50 @@
 {
-  "name": "typescript-action",
-  "version": "0.0.0",
-  "private": true,
-  "description": "TypeScript template action",
+  "name": "notion-card-update-action",
+  "version": "0.0.1",
+  "private": false,
+  "description": "Typescript action to update notion cards",
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
-    "format": "prettier --write '**/*.ts'",
-    "format-check": "prettier --check '**/*.ts'",
+    "build:clean": "rm -rf lib & npm run build",
+    "format": "prettier --write 'src/*.ts'",
+    "format-check": "prettier --check 'src/*.ts'",
     "lint": "eslint src/**/*.ts",
     "package": "ncc build --source-map --license licenses.txt",
+    "package:clean": "rm -rf dist & npm run package",
     "test": "jest",
-    "all": "npm run build && npm run format && npm run lint && npm run package && npm test"
+    "all": "npm run build:clean && npm run format && npm run lint && npm run package:clean",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/typescript-action.git"
+    "url": "git+https://github.com/ramykl/notion-card-update-action.git"
   },
   "keywords": [
     "actions",
     "node",
-    "setup"
+    "notion"
   ],
-  "author": "",
+  "author": "Ramy Loveridge",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.8.2"
+    "@actions/core": "^1.8.2",
+    "@actions/github": "^5.0.3",
+    "@notionhq/client": "^1.0.4"
   },
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^3.2.0",
     "@types/node": "^17.0.42",
     "@typescript-eslint/parser": "^5.27.1",
     "@vercel/ncc": "^0.34.0",
     "eslint": "^8.17.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-github": "^4.3.6",
     "eslint-plugin-jest": "^26.5.3",
+    "husky": "^8.0.1",
     "jest": "^27.2.5",
     "js-yaml": "^4.1.0",
+    "lint-staged": "^13.0.1",
     "prettier": "2.6.2",
     "ts-jest": "^27.1.2",
     "typescript": "^4.7.3"

@@ -1,0 +1,21 @@
+name: Update notion page
+
+on:
+  pull_request:
+    types: [opened, closed]
+
+jobs:
+  update_card:
+    runs-on: ubuntu-latest
+    name: Updates Notion Card
+    steps:
+      - name: Update card status with PR progression
+        uses: ramykl/notion-card-update-action
+        id: update-card
+        with:
+          page_property: 'Status'
+          page_property_type: 'select'
+          on_pr: 'In progress'
+          on_merge: 'Done'
+        env:
+          NOTION_KEY: ${{ secrets.NOTION_GITHUB_INTEGRATION_KEY }}

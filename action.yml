@@ -1,11 +1,26 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Update notion cards'
+description: 'Javascript action for updating notion cards'
+author: 'Ramy Loveridge'
+branding:
+  icon: 'align-justify'
+  color: 'blue'
 inputs:
-  milliseconds: # change this
-    required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+  page_property:
+    description: 'The name of the property to update. Default is "Status"'
+    required: false
+    default: 'Status'
+  page_property_type:
+    description: 'The notion type of the property to update. Default is "select"'
+    required: false
+    default: 'select'
+  on_pr:
+    description: 'The value of page-property to be updated on PR event. Default is "In progress"'
+    required: false
+    default: 'In progress'
+  on_merge:
+    description: 'The value of page-property to be updated on PR MERGE event. Default is "QA Testing"'
+    required: false
+    default: 'Done'
 runs:
   using: 'node16'
   main: 'dist/index.js'

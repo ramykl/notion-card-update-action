@@ -1,105 +1,54 @@
-<p align="center">
-  <a href="https://github.com/actions/typescript-action/actions"><img alt="typescript-action status" src="https://github.com/actions/typescript-action/workflows/build-test/badge.svg"></a>
-</p>
+# Notion Cards GH Action
 
-# Create a JavaScript Action using TypeScript
+This card updates a property from a page linked in a PR description. Commonly used to update the "Status" property of a
+card used to keep track of features.
 
-Use this template to bootstrap the creation of a TypeScript action.:rocket:
+## How does it works?
 
-This template includes compilation support, tests, a validation workflow, publishing, and versioning guidance.  
+A regex match is performed over the PR body. It matches the all URLs that has notion.so format in it, and then the ID
+of the Card is extracted from the URL.
 
-If you are new, there's also a simpler introduction.  See the [Hello World JavaScript Action](https://github.com/actions/hello-world-javascript-action)
+## Variables
 
-## Create an action from this template
+| Key        | Description                                                   |
+| ---------- | ------------------------------------------------------------- |
+| NOTION_KEY | The token url retrieved from the token cookie in your browser |
 
-Click the `Use this Template` and provide the new repo details for your action
+## Inputs
 
-## Code in Main
+| Key           | Description                                                                                              |
+| ------------- | -------------------------------------------------------------------------------------------------------- |
+| page_property | The name of the property to update. This property must be already created in Notion. Default is "Status" |
+| on_pr         | The value of PAGE_PROPERTY to be updated on PR event. Default is "Code Review"                           |
 
-> First, you'll need to have a reasonably modern version of `node` handy. This won't work with versions older than 9, for instance.
+## Example usage
 
-Install the dependencies  
-```bash
-$ npm install
+See main.yml in this repo.
+
+On PR body:
+
+```markdown
+This PR implements [Notion Card](www.notion.so/Card-1234)
 ```
 
-Build the typescript and package it for distribution
-```bash
-$ npm run build && npm run package
+```yml
+name: Update notion card
+
+on:
+  pull_request:
+    types: [opened, closed]
+
+jobs:
+  update_card:
+    runs-on: ubuntu-latest
+    name: Updates Notion Card
+    steps:
+      - name: Updates to Code Review
+        uses: ramykl/notion-card-update-action@main
+        with:
+          page_property: 'Status'
+          on_pr: 'In progress'
+          on_merge: 'Done'
+        env:
+          NOTION_KEY: ---
 ```
-
-Run the tests :heavy_check_mark:  
-```bash
-$ npm test
-
- PASS  ./index.test.js
-  ✓ throws invalid number (3ms)
-  ✓ wait 500 ms (504ms)
-  ✓ test runs (95ms)
-
-...
-```
-
-## Change action.yml
-
-The action.yml defines the inputs and output for your action.
-
-Update the action.yml with your name, description, inputs and outputs for your action.
-
-See the [documentation](https://help.github.com/en/articles/metadata-syntax-for-github-actions)
-
-## Change the Code
-
-Most toolkit and CI/CD operations involve async operations so the action is run in an async function.
-
-```javascript
-import * as core from '@actions/core';
-...
-
-async function run() {
-  try { 
-      ...
-  } 
-  catch (error) {
-    core.setFailed(error.message);
-  }
-}
-
-run()
-```
-
-See the [toolkit documentation](https://github.com/actions/toolkit/blob/master/README.md#packages) for the various packages.
-
-## Publish to a distribution branch
-
-Actions are run from GitHub repos so we will checkin the packed dist folder. 
-
-Then run [ncc](https://github.com/zeit/ncc) and push the results:
-```bash
-$ npm run package
-$ git add dist
-$ git commit -a -m "prod dependencies"
-$ git push origin releases/v1
-```
-
-Note: We recommend using the `--license` option for ncc, which will create a license file for all of the production node modules used in your project.
-
-Your action is now published! :rocket: 
-
-See the [versioning documentation](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md)
-
-## Validate
-
-You can now validate the action by referencing `./` in a workflow in your repo (see [test.yml](.github/workflows/test.yml))
-
-```yaml
-uses: ./
-with:
-  milliseconds: 1000
-```
-
-See the [actions tab](https://github.com/actions/typescript-action/actions) for runs of this action! :rocket:
-
-## Usage:
-
-After testing you can [create a v1 tag](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md) to reference the stable and latest V1 action
