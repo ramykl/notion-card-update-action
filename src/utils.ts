@@ -27,16 +27,16 @@ const extractNotionLinks: (body: string) => RegExpMatchArray[] = (
   return results
 }
 
-const valueFromEvent: (merged: boolean, closed: boolean) => string = (
-  merged,
-  closed
-) => {
+const valueFromEvent: (
+  merged: boolean,
+  closed: boolean
+) => string | undefined = (merged, closed) => {
   if (!merged && !closed) {
     return core.getInput(OnPR)
   } else if (merged && closed) {
     return core.getInput(OnMerge)
   } else {
-    return ''
+    return undefined
   }
 }
 

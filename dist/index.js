@@ -79,16 +79,20 @@ function run() {
         try {
             const payload = github.context.payload;
             const body = (_a = payload.pull_request) === null || _a === void 0 ? void 0 : _a.body;
-            console.log(JSON.stringify(payload.action));
             const closed = payload.action === 'closed';
             const merged = (_b = payload.pull_request) === null || _b === void 0 ? void 0 : _b.merged;
             const value = (0, utils_1.valueFromEvent)(merged, closed);
-            const urls = (0, utils_1.extractNotionLinks)(body || '');
-            const promises = urls.map(match => {
-                const pageId = (0, utils_1.getIdFromUrl)(match[0]);
-                return (0, notion_1.updateCard)(pageId, core.getInput(constants_1.PageProperty), core.getInput(constants_1.PagePropertyType), value);
-            });
-            yield Promise.all(promises);
+            if (value !== undefined) {
+                const urls = (0, utils_1.extractNotionLinks)(body || '');
+                const promises = urls.map(match => {
+                    const pageId = (0, utils_1.getIdFromUrl)(match[0]);
+                    return (0, notion_1.updateCard)(pageId, core.getInput(constants_1.PageProperty), core.getInput(constants_1.PagePropertyType), value);
+                });
+                yield Promise.all(promises);
+            }
+            else {
+                core.warning("The action type doesn't match so there is nothing to do");
+            }
         }
         catch (error) {
             if (error instanceof Error)
@@ -226,7 +230,7 @@ const valueFromEvent = (merged, closed) => {
         return core.getInput(constants_1.OnMerge);
     }
     else {
-        return '';
+        return undefined;
     }
 };
 exports.valueFromEvent = valueFromEvent;
