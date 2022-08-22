@@ -6,25 +6,25 @@ const getIdFromUrl: (page: string) => string = (page: string) => {
   return page.slice(-32)
 }
 
-const extractNotionLinks: (body: string) => RegExpMatchArray[] = (
-  body: string
-) => {
+const extractNotionLinks: (body: string) => string[] = (body: string) => {
   const markdownRegex = new RegExp(
     `(https?://)?(www.notion.so|notion.so)/?[^(\\s)]+`,
     'g'
   )
   const results = [...body.matchAll(markdownRegex)]
+  let links = results.map(match => {
+    return match[0]
+  })
 
-  if (results.length < 1) {
+  if (links.length < 1) {
     console.error('No Notion URL was found')
   } else if (results.length >= 1) {
-    for (const match of results) {
-      const index = results.indexOf(match)
-      console.log(`${index} URL matched was: ${match[0]}`)
-    }
+    links = links.map(match => {
+      return getIdFromUrl(match)
+    })
   }
 
-  return results
+  return [...new Set(links)]
 }
 
 const valueFromEvent: (

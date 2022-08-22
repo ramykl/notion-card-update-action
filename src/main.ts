@@ -3,7 +3,7 @@ import * as github from '@actions/github'
 
 import {PageProperty, PagePropertyType} from './constants'
 import {updateCard} from './notion'
-import {extractNotionLinks, getIdFromUrl, valueFromEvent} from './utils'
+import {extractNotionLinks, valueFromEvent} from './utils'
 
 async function run(): Promise<void> {
   try {
@@ -13,11 +13,10 @@ async function run(): Promise<void> {
     const merged = payload.pull_request?.merged
     const value = valueFromEvent(merged, closed)
     if (value !== undefined) {
-      const urls = extractNotionLinks(body || '')
-      const promises = urls.map(match => {
-        const pageId = getIdFromUrl(match[0])
+      const notionIds = extractNotionLinks(body || '')
+      const promises = notionIds.map(id => {
         return updateCard(
-          pageId,
+          id,
           core.getInput(PageProperty),
           core.getInput(PagePropertyType),
           value

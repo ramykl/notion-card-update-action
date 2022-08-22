@@ -18,12 +18,13 @@ const updateCard: (
   core.info(process.env.NOTION_KEY || '')
   // Initializing a client
   const notion = new Client({
-    auth: process.env.NOTION_KEY
+    auth: process.env.NOTION_KEY,
+    notionVersion: '2022-06-28'
   })
-  // const response = await notion.pages.retrieve({
-  //   page_id: pageId
-  // })
-  // console.log(JSON.stringify(response))
+  const response = await notion.pages.retrieve({
+    page_id: pageId
+  })
+  console.log(JSON.stringify(response))
   await notion.pages.update({
     page_id: pageId,
     properties: {
