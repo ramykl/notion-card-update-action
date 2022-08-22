@@ -1,11 +1,11 @@
 {
   "name": "notion-card-update-action",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "description": "Typescript action to update notion cards",
   "main": "lib/main.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -b src",
     "build:clean": "rm -rf lib & npm run build",
     "format": "prettier --write 'src/*.ts' 'tests/*.ts'",
     "format-check": "prettier --check 'src/*.ts' 'tests/*.ts'",

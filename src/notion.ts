@@ -24,7 +24,11 @@ const updateCard: (
   const response = await notion.pages.retrieve({
     page_id: pageId
   })
-  console.log(JSON.stringify(response))
+  // @ts-expect-error properties doesn't exist on type...
+  if (response && response.properties) {
+    // @ts-expect-error properties doesn't exist on type...
+    console.log(JSON.stringify(response.properties))
+  }
   await notion.pages.update({
     page_id: pageId,
     properties: {
