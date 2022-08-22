@@ -58,47 +58,35 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
 const constants_1 = __nccwpck_require__(5105);
 const notion_1 = __nccwpck_require__(8605);
 const utils_1 = __nccwpck_require__(918);
-function run() {
+async function run() {
     var _a, _b;
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const payload = github.context.payload;
-            const body = (_a = payload.pull_request) === null || _a === void 0 ? void 0 : _a.body;
-            const closed = payload.action === 'closed';
-            const merged = (_b = payload.pull_request) === null || _b === void 0 ? void 0 : _b.merged;
-            const value = (0, utils_1.valueFromEvent)(merged, closed);
-            if (value !== undefined) {
-                const urls = (0, utils_1.extractNotionLinks)(body || '');
-                const promises = urls.map(match => {
-                    const pageId = (0, utils_1.getIdFromUrl)(match[0]);
-                    return (0, notion_1.updateCard)(pageId, core.getInput(constants_1.PageProperty), core.getInput(constants_1.PagePropertyType), value);
-                });
-                yield Promise.all(promises);
-            }
-            else {
-                core.warning("The action type doesn't match so there is nothing to do");
-            }
+    try {
+        const payload = github.context.payload;
+        const body = (_a = payload.pull_request) === null || _a === void 0 ? void 0 : _a.body;
+        const closed = payload.action === 'closed';
+        const merged = (_b = payload.pull_request) === null || _b === void 0 ? void 0 : _b.merged;
+        const value = (0, utils_1.valueFromEvent)(merged, closed);
+        if (value !== undefined) {
+            const notionIds = (0, utils_1.extractNotionLinks)(body || '');
+            const promises = notionIds.map(id => {
+                return (0, notion_1.updateCard)(id, core.getInput(constants_1.PageProperty), core.getInput(constants_1.PagePropertyType), value);
+            });
+            await Promise.all(promises);
         }
-        catch (error) {
-            if (error instanceof Error)
-                core.setFailed(error.message);
+        else {
+            core.warning("The action type doesn't match so there is nothing to do");
         }
-    });
+    }
+    catch (error) {
+        if (error instanceof Error)
+            core.setFailed(error.message);
+    }
 }
 run();
 
@@ -133,39 +121,35 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.updateCard = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const client_1 = __nccwpck_require__(324);
 const constants_1 = __nccwpck_require__(5105);
 const utils_1 = __nccwpck_require__(918);
-const updateCard = (pageId, key, type, value) => __awaiter(void 0, void 0, void 0, function* () {
+const updateCard = async (pageId, key, type, value) => {
     core.info(process.env.NOTION_KEY || '');
     // Initializing a client
     const notion = new client_1.Client({
-        auth: process.env.NOTION_KEY
+        auth: process.env.NOTION_KEY,
+        notionVersion: '2022-06-28'
     });
-    // const response = await notion.pages.retrieve({
-    //   page_id: pageId
-    // })
-    // console.log(JSON.stringify(response))
-    yield notion.pages.update({
+    const response = await notion.pages.retrieve({
+        page_id: pageId
+    });
+    // @ts-expect-error properties doesn't exist on type...
+    if (response && response.properties) {
+        // @ts-expect-error properties doesn't exist on type...
+        console.log(JSON.stringify(response.properties));
+    }
+    await notion.pages.update({
         page_id: pageId,
         properties: {
             [key]: (0, utils_1.notionTypeToPropValue)(core.getInput(constants_1.PagePropertyType), value)
         }
     });
     console.log(`${key} was successfully updated to ${value} on page ${pageId}`);
-});
+};
 exports.updateCard = updateCard;
 
 
@@ -210,16 +194,18 @@ exports.getIdFromUrl = getIdFromUrl;
 const extractNotionLinks = (body) => {
     const markdownRegex = new RegExp(`(https?://)?(www.notion.so|notion.so)/?[^(\\s)]+`, 'g');
     const results = [...body.matchAll(markdownRegex)];
-    if (results.length < 1) {
+    let links = results.map(match => {
+        return match[0];
+    });
+    if (links.length < 1) {
         console.error('No Notion URL was found');
     }
     else if (results.length >= 1) {
-        for (const match of results) {
-            const index = results.indexOf(match);
-            console.log(`${index} URL matched was: ${match[0]}`);
-        }
+        links = links.map(match => {
+            return getIdFromUrl(match);
+        });
     }
-    return results;
+    return [...new Set(links)];
 };
 exports.extractNotionLinks = extractNotionLinks;
 const valueFromEvent = (merged, closed) => {

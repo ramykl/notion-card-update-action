@@ -18,12 +18,17 @@ const updateCard: (
   core.info(process.env.NOTION_KEY || '')
   // Initializing a client
   const notion = new Client({
-    auth: process.env.NOTION_KEY
+    auth: process.env.NOTION_KEY,
+    notionVersion: '2022-06-28'
   })
-  // const response = await notion.pages.retrieve({
-  //   page_id: pageId
-  // })
-  // console.log(JSON.stringify(response))
+  const response = await notion.pages.retrieve({
+    page_id: pageId
+  })
+  // @ts-expect-error properties doesn't exist on type...
+  if (response && response.properties) {
+    // @ts-expect-error properties doesn't exist on type...
+    console.log(JSON.stringify(response.properties))
+  }
   await notion.pages.update({
     page_id: pageId,
     properties: {

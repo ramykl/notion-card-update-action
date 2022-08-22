@@ -1,0 +1,13 @@
+{
+  "extends": "../tsconfig.json",
+  "references": [{
+    "name": "notion-card-update-github-action",
+    "path": ".."
+  }],
+  "compilerOptions": {
+    "types": ["jest"],
+    "rootDir": "..",
+    "noEmit": true
+  },
+  "include": ["node_modules", "."]
+}
