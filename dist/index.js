@@ -2151,7 +2151,7 @@ var _Client_auth, _Client_logLevel, _Client_logger, _Client_prefixUrl, _Client_t
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const logging_1 = __nccwpck_require__(2096);
 const errors_1 = __nccwpck_require__(8259);
-const helpers_1 = __nccwpck_require__(5682);
+const utils_1 = __nccwpck_require__(8769);
 const api_endpoints_1 = __nccwpck_require__(1605);
 const node_fetch_1 = __nccwpck_require__(467);
 const package_json_1 = __nccwpck_require__(3797);
@@ -2178,8 +2178,8 @@ class Client {
                 return this.request({
                     path: api_endpoints_1.getBlock.path(args),
                     method: api_endpoints_1.getBlock.method,
-                    query: (0, helpers_1.pick)(args, api_endpoints_1.getBlock.queryParams),
-                    body: (0, helpers_1.pick)(args, api_endpoints_1.getBlock.bodyParams),
+                    query: (0, utils_1.pick)(args, api_endpoints_1.getBlock.queryParams),
+                    body: (0, utils_1.pick)(args, api_endpoints_1.getBlock.bodyParams),
                     auth: args === null || args === void 0 ? void 0 : args.auth,
                 });
             },
@@ -2190,8 +2190,8 @@ class Client {
                 return this.request({
                     path: api_endpoints_1.updateBlock.path(args),
                     method: api_endpoints_1.updateBlock.method,
-                    query: (0, helpers_1.pick)(args, api_endpoints_1.updateBlock.queryParams),
-                    body: (0, helpers_1.pick)(args, api_endpoints_1.updateBlock.bodyParams),
+                    query: (0, utils_1.pick)(args, api_endpoints_1.updateBlock.queryParams),
+                    body: (0, utils_1.pick)(args, api_endpoints_1.updateBlock.bodyParams),
                     auth: args === null || args === void 0 ? void 0 : args.auth,
                 });
             },
@@ -2202,8 +2202,8 @@ class Client {
                 return this.request({
                     path: api_endpoints_1.deleteBlock.path(args),
                     method: api_endpoints_1.deleteBlock.method,
-                    query: (0, helpers_1.pick)(args, api_endpoints_1.deleteBlock.queryParams),
-                    body: (0, helpers_1.pick)(args, api_endpoints_1.deleteBlock.bodyParams),
+                    query: (0, utils_1.pick)(args, api_endpoints_1.deleteBlock.queryParams),
+                    body: (0, utils_1.pick)(args, api_endpoints_1.deleteBlock.bodyParams),
                     auth: args === null || args === void 0 ? void 0 : args.auth,
                 });
             },
@@ -2215,8 +2215,8 @@ class Client {
                     return this.request({
                         path: api_endpoints_1.appendBlockChildren.path(args),
                         method: api_endpoints_1.appendBlockChildren.method,
-                        query: (0, helpers_1.pick)(args, api_endpoints_1.appendBlockChildren.queryParams),
-                        body: (0, helpers_1.pick)(args, api_endpoints_1.appendBlockChildren.bodyParams),
+                        query: (0, utils_1.pick)(args, api_endpoints_1.appendBlockChildren.queryParams),
+                        body: (0, utils_1.pick)(args, api_endpoints_1.appendBlockChildren.bodyParams),
                         auth: args === null || args === void 0 ? void 0 : args.auth,
                     });
                 },
@@ -2227,8 +2227,8 @@ class Client {
                     return this.request({
                         path: api_endpoints_1.listBlockChildren.path(args),
                         method: api_endpoints_1.listBlockChildren.method,
-                        query: (0, helpers_1.pick)(args, api_endpoints_1.listBlockChildren.queryParams),
-                        body: (0, helpers_1.pick)(args, api_endpoints_1.listBlockChildren.bodyParams),
+                        query: (0, utils_1.pick)(args, api_endpoints_1.listBlockChildren.queryParams),
+                        body: (0, utils_1.pick)(args, api_endpoints_1.listBlockChildren.bodyParams),
                         auth: args === null || args === void 0 ? void 0 : args.auth,
                     });
                 },
@@ -2244,8 +2244,8 @@ class Client {
                 return this.request({
                     path: api_endpoints_1.listDatabases.path(),
                     method: api_endpoints_1.listDatabases.method,
-                    query: (0, helpers_1.pick)(args, api_endpoints_1.listDatabases.queryParams),
-                    body: (0, helpers_1.pick)(args, api_endpoints_1.listDatabases.bodyParams),
+                    query: (0, utils_1.pick)(args, api_endpoints_1.listDatabases.queryParams),
+                    body: (0, utils_1.pick)(args, api_endpoints_1.listDatabases.bodyParams),
                     auth: args === null || args === void 0 ? void 0 : args.auth,
                 });
             },
@@ -2256,8 +2256,8 @@ class Client {
                 return this.request({
                     path: api_endpoints_1.getDatabase.path(args),
                     method: api_endpoints_1.getDatabase.method,
-                    query: (0, helpers_1.pick)(args, api_endpoints_1.getDatabase.queryParams),
-                    body: (0, helpers_1.pick)(args, api_endpoints_1.getDatabase.bodyParams),
+                    query: (0, utils_1.pick)(args, api_endpoints_1.getDatabase.queryParams),
+                    body: (0, utils_1.pick)(args, api_endpoints_1.getDatabase.bodyParams),
                     auth: args === null || args === void 0 ? void 0 : args.auth,
                 });
             },
@@ -2268,8 +2268,8 @@ class Client {
                 return this.request({
                     path: api_endpoints_1.queryDatabase.path(args),
                     method: api_endpoints_1.queryDatabase.method,
-                    query: (0, helpers_1.pick)(args, api_endpoints_1.queryDatabase.queryParams),
-                    body: (0, helpers_1.pick)(args, api_endpoints_1.queryDatabase.bodyParams),
+                    query: (0, utils_1.pick)(args, api_endpoints_1.queryDatabase.queryParams),
+                    body: (0, utils_1.pick)(args, api_endpoints_1.queryDatabase.bodyParams),
                     auth: args === null || args === void 0 ? void 0 : args.auth,
                 });
             },
@@ -2280,8 +2280,8 @@ class Client {
                 return this.request({
                     path: api_endpoints_1.createDatabase.path(),
                     method: api_endpoints_1.createDatabase.method,
-                    query: (0, helpers_1.pick)(args, api_endpoints_1.createDatabase.queryParams),
-                    body: (0, helpers_1.pick)(args, api_endpoints_1.createDatabase.bodyParams),
+                    query: (0, utils_1.pick)(args, api_endpoints_1.createDatabase.queryParams),
+                    body: (0, utils_1.pick)(args, api_endpoints_1.createDatabase.bodyParams),
                     auth: args === null || args === void 0 ? void 0 : args.auth,
                 });
             },
@@ -2292,8 +2292,8 @@ class Client {
                 return this.request({
                     path: api_endpoints_1.updateDatabase.path(args),
                     method: api_endpoints_1.updateDatabase.method,
-                    query: (0, helpers_1.pick)(args, api_endpoints_1.updateDatabase.queryParams),
-                    body: (0, helpers_1.pick)(args, api_endpoints_1.updateDatabase.bodyParams),
+                    query: (0, utils_1.pick)(args, api_endpoints_1.updateDatabase.queryParams),
+                    body: (0, utils_1.pick)(args, api_endpoints_1.updateDatabase.bodyParams),
                     auth: args === null || args === void 0 ? void 0 : args.auth,
                 });
             },
@@ -2306,8 +2306,8 @@ class Client {
                 return this.request({
                     path: api_endpoints_1.createPage.path(),
                     method: api_endpoints_1.createPage.method,
-                    query: (0, helpers_1.pick)(args, api_endpoints_1.createPage.queryParams),
-                    body: (0, helpers_1.pick)(args, api_endpoints_1.createPage.bodyParams),
+                    query: (0, utils_1.pick)(args, api_endpoints_1.createPage.queryParams),
+                    body: (0, utils_1.pick)(args, api_endpoints_1.createPage.bodyParams),
                     auth: args === null || args === void 0 ? void 0 : args.auth,
                 });
             },
@@ -2318,8 +2318,8 @@ class Client {
                 return this.request({
                     path: api_endpoints_1.getPage.path(args),
                     method: api_endpoints_1.getPage.method,
-                    query: (0, helpers_1.pick)(args, api_endpoints_1.getPage.queryParams),
-                    body: (0, helpers_1.pick)(args, api_endpoints_1.getPage.bodyParams),
+                    query: (0, utils_1.pick)(args, api_endpoints_1.getPage.queryParams),
+                    body: (0, utils_1.pick)(args, api_endpoints_1.getPage.bodyParams),
                     auth: args === null || args === void 0 ? void 0 : args.auth,
                 });
             },
@@ -2330,8 +2330,8 @@ class Client {
                 return this.request({
                     path: api_endpoints_1.updatePage.path(args),
                     method: api_endpoints_1.updatePage.method,
-                    query: (0, helpers_1.pick)(args, api_endpoints_1.updatePage.queryParams),
-                    body: (0, helpers_1.pick)(args, api_endpoints_1.updatePage.bodyParams),
+                    query: (0, utils_1.pick)(args, api_endpoints_1.updatePage.queryParams),
+                    body: (0, utils_1.pick)(args, api_endpoints_1.updatePage.bodyParams),
                     auth: args === null || args === void 0 ? void 0 : args.auth,
                 });
             },
@@ -2343,8 +2343,8 @@ class Client {
                     return this.request({
                         path: api_endpoints_1.getPageProperty.path(args),
                         method: api_endpoints_1.getPageProperty.method,
-                        query: (0, helpers_1.pick)(args, api_endpoints_1.getPageProperty.queryParams),
-                        body: (0, helpers_1.pick)(args, api_endpoints_1.getPageProperty.bodyParams),
+                        query: (0, utils_1.pick)(args, api_endpoints_1.getPageProperty.queryParams),
+                        body: (0, utils_1.pick)(args, api_endpoints_1.getPageProperty.bodyParams),
                         auth: args === null || args === void 0 ? void 0 : args.auth,
                     });
                 },
@@ -2358,8 +2358,8 @@ class Client {
                 return this.request({
                     path: api_endpoints_1.getUser.path(args),
                     method: api_endpoints_1.getUser.method,
-                    query: (0, helpers_1.pick)(args, api_endpoints_1.getUser.queryParams),
-                    body: (0, helpers_1.pick)(args, api_endpoints_1.getUser.bodyParams),
+                    query: (0, utils_1.pick)(args, api_endpoints_1.getUser.queryParams),
+                    body: (0, utils_1.pick)(args, api_endpoints_1.getUser.bodyParams),
                     auth: args === null || args === void 0 ? void 0 : args.auth,
                 });
             },
@@ -2370,8 +2370,8 @@ class Client {
                 return this.request({
                     path: api_endpoints_1.listUsers.path(),
                     method: api_endpoints_1.listUsers.method,
-                    query: (0, helpers_1.pick)(args, api_endpoints_1.listUsers.queryParams),
-                    body: (0, helpers_1.pick)(args, api_endpoints_1.listUsers.bodyParams),
+                    query: (0, utils_1.pick)(args, api_endpoints_1.listUsers.queryParams),
+                    body: (0, utils_1.pick)(args, api_endpoints_1.listUsers.bodyParams),
                     auth: args === null || args === void 0 ? void 0 : args.auth,
                 });
             },
@@ -2382,11 +2382,49 @@ class Client {
                 return this.request({
                     path: api_endpoints_1.getSelf.path(),
                     method: api_endpoints_1.getSelf.method,
-                    query: (0, helpers_1.pick)(args, api_endpoints_1.getSelf.queryParams),
-                    body: (0, helpers_1.pick)(args, api_endpoints_1.getSelf.bodyParams),
+                    query: (0, utils_1.pick)(args, api_endpoints_1.getSelf.queryParams),
+                    body: (0, utils_1.pick)(args, api_endpoints_1.getSelf.bodyParams),
                     auth: args === null || args === void 0 ? void 0 : args.auth,
                 });
             },
+        };
+        this.comments = {
+            /**
+             * Create a comment
+             */
+            create: (args) => {
+                return this.request({
+                    path: api_endpoints_1.createComment.path(),
+                    method: api_endpoints_1.createComment.method,
+                    query: (0, utils_1.pick)(args, api_endpoints_1.createComment.queryParams),
+                    body: (0, utils_1.pick)(args, api_endpoints_1.createComment.bodyParams),
+                    auth: args === null || args === void 0 ? void 0 : args.auth,
+                });
+            },
+            /**
+             * List comments
+             */
+            list: (args) => {
+                return this.request({
+                    path: api_endpoints_1.listComments.path(),
+                    method: api_endpoints_1.listComments.method,
+                    query: (0, utils_1.pick)(args, api_endpoints_1.listComments.queryParams),
+                    body: (0, utils_1.pick)(args, api_endpoints_1.listComments.bodyParams),
+                    auth: args === null || args === void 0 ? void 0 : args.auth,
+                });
+            },
+        };
+        /**
+         * Search
+         */
+        this.search = (args) => {
+            return this.request({
+                path: api_endpoints_1.search.path(),
+                method: api_endpoints_1.search.method,
+                query: (0, utils_1.pick)(args, api_endpoints_1.search.queryParams),
+                body: (0, utils_1.pick)(args, api_endpoints_1.search.bodyParams),
+                auth: args === null || args === void 0 ? void 0 : args.auth,
+            });
         };
         __classPrivateFieldSet(this, _Client_auth, options === null || options === void 0 ? void 0 : options.auth, "f");
         __classPrivateFieldSet(this, _Client_logLevel, (_a = options === null || options === void 0 ? void 0 : options.logLevel) !== null && _a !== void 0 ? _a : logging_1.LogLevel.WARN, "f");
@@ -2431,7 +2469,7 @@ class Client {
         }
         try {
             const response = await errors_1.RequestTimeoutError.rejectAfterTimeout(__classPrivateFieldGet(this, _Client_fetch, "f").call(this, url.toString(), {
-                method,
+                method: method.toUpperCase(),
                 headers,
                 body: bodyAsJsonString,
                 agent: __classPrivateFieldGet(this, _Client_agent, "f"),
@@ -2461,18 +2499,6 @@ class Client {
             }
             throw error;
         }
-    }
-    /**
-     * Search
-     */
-    search(args) {
-        return this.request({
-            path: api_endpoints_1.search.path(),
-            method: api_endpoints_1.search.method,
-            query: (0, helpers_1.pick)(args, api_endpoints_1.search.queryParams),
-            body: (0, helpers_1.pick)(args, api_endpoints_1.search.bodyParams),
-            auth: args === null || args === void 0 ? void 0 : args.auth,
-        });
     }
     /**
      * Emits a log message to the console.
@@ -2505,7 +2531,7 @@ class Client {
 }
 exports["default"] = Client;
 _Client_auth = new WeakMap(), _Client_logLevel = new WeakMap(), _Client_logger = new WeakMap(), _Client_prefixUrl = new WeakMap(), _Client_timeoutMs = new WeakMap(), _Client_notionVersion = new WeakMap(), _Client_fetch = new WeakMap(), _Client_agent = new WeakMap(), _Client_userAgent = new WeakMap();
-Client.defaultNotionVersion = "2022-02-22";
+Client.defaultNotionVersion = "2022-06-28";
 //# sourceMappingURL=Client.js.map
 
 /***/ }),
@@ -2518,7 +2544,7 @@ Client.defaultNotionVersion = "2022-02-22";
 // cspell:disable-file
 // Note: This is a generated file.
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.search = exports.createDatabase = exports.listDatabases = exports.queryDatabase = exports.updateDatabase = exports.getDatabase = exports.appendBlockChildren = exports.listBlockChildren = exports.deleteBlock = exports.updateBlock = exports.getBlock = exports.getPageProperty = exports.updatePage = exports.getPage = exports.createPage = exports.listUsers = exports.getUser = exports.getSelf = void 0;
+exports.listComments = exports.createComment = exports.search = exports.createDatabase = exports.listDatabases = exports.queryDatabase = exports.updateDatabase = exports.getDatabase = exports.appendBlockChildren = exports.listBlockChildren = exports.deleteBlock = exports.updateBlock = exports.getBlock = exports.getPageProperty = exports.updatePage = exports.getPage = exports.createPage = exports.listUsers = exports.getUser = exports.getSelf = void 0;
 exports.getSelf = {
     method: "get",
     pathParams: [],
@@ -2644,7 +2670,15 @@ exports.updateDatabase = {
     method: "patch",
     pathParams: ["database_id"],
     queryParams: [],
-    bodyParams: ["title", "icon", "cover", "properties", "archived"],
+    bodyParams: [
+        "title",
+        "description",
+        "icon",
+        "cover",
+        "properties",
+        "is_inline",
+        "archived",
+    ],
     path: (p) => `databases/${p.database_id}`,
 };
 exports.queryDatabase = {
@@ -2665,7 +2699,15 @@ exports.createDatabase = {
     method: "post",
     pathParams: [],
     queryParams: [],
-    bodyParams: ["parent", "properties", "icon", "cover", "title"],
+    bodyParams: [
+        "parent",
+        "properties",
+        "icon",
+        "cover",
+        "title",
+        "description",
+        "is_inline",
+    ],
     path: () => `databases`,
 };
 exports.search = {
@@ -2674,6 +2716,20 @@ exports.search = {
     queryParams: [],
     bodyParams: ["sort", "query", "start_cursor", "page_size", "filter"],
     path: () => `search`,
+};
+exports.createComment = {
+    method: "post",
+    pathParams: [],
+    queryParams: [],
+    bodyParams: ["parent", "rich_text", "discussion_id"],
+    path: () => `comments`,
+};
+exports.listComments = {
+    method: "get",
+    pathParams: [],
+    queryParams: ["block_id", "start_cursor", "page_size"],
+    bodyParams: [],
+    path: () => `comments`,
 };
 //# sourceMappingURL=api-endpoints.js.map
 
@@ -2686,7 +2742,7 @@ exports.search = {
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.buildRequestError = exports.APIResponseError = exports.UnknownHTTPResponseError = exports.isHTTPResponseError = exports.RequestTimeoutError = exports.isNotionClientError = exports.ClientErrorCode = exports.APIErrorCode = void 0;
-const helpers_1 = __nccwpck_require__(5682);
+const utils_1 = __nccwpck_require__(8769);
 /**
  * Error codes returned in responses from the API.
  */
@@ -2722,7 +2778,7 @@ class NotionClientErrorBase extends Error {
  * @returns `true` if error is a `NotionClientError`.
  */
 function isNotionClientError(error) {
-    return (0, helpers_1.isObject)(error) && error instanceof NotionClientErrorBase;
+    return (0, utils_1.isObject)(error) && error instanceof NotionClientErrorBase;
 }
 exports.isNotionClientError = isNotionClientError;
 /**
@@ -2871,7 +2927,7 @@ function parseAPIErrorResponseBody(body) {
     catch (parseError) {
         return;
     }
-    if (!(0, helpers_1.isObject)(parsed) ||
+    if (!(0, utils_1.isObject)(parsed) ||
         typeof parsed["message"] !== "string" ||
         !isAPIErrorCode(parsed["code"])) {
         return;
@@ -2895,27 +2951,99 @@ function isAPIErrorCode(code) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.isObject = exports.pick = exports.assertNever = void 0;
+exports.isFullComment = exports.isFullUser = exports.isFullDatabase = exports.isFullPage = exports.isFullBlock = exports.collectPaginatedAPI = exports.iteratePaginatedAPI = void 0;
 /**
- * Utility for enforcing exhaustiveness checks in the type system.
+ * Returns an async iterator over the results of any paginated Notion API.
  *
- * @see https://basarat.gitbook.io/typescript/type-system/discriminated-unions#throw-in-exhaustive-checks
+ * Example (given a notion Client called `notion`):
  *
- * @param value The variable with no remaining values
+ * ```
+ * for await (const block of iteratePaginatedAPI(notion.blocks.children.list, {
+ *   block_id: parentBlockId,
+ * })) {
+ *   // Do something with block.
+ * }
+ * ```
+ *
+ * @param listFn A bound function on the Notion client that represents a conforming paginated
+ *   API. Example: `notion.blocks.children.list`.
+ * @param firstPageArgs Arguments that should be passed to the API on the first and subsequent
+ *   calls to the API. Any necessary `next_cursor` will be automatically populated by
+ *   this function. Example: `{ block_id: "<my block id>" }`
  */
-function assertNever(value) {
-    throw new Error(`Unexpected value should never occur: ${value}`);
+async function* iteratePaginatedAPI(listFn, firstPageArgs) {
+    let nextCursor = firstPageArgs.start_cursor;
+    do {
+        const response = await listFn({
+            ...firstPageArgs,
+            start_cursor: nextCursor,
+        });
+        yield* response.results;
+        nextCursor = response.next_cursor;
+    } while (nextCursor);
 }
-exports.assertNever = assertNever;
-function pick(base, keys) {
-    const entries = keys.map(key => [key, base === null || base === void 0 ? void 0 : base[key]]);
-    return Object.fromEntries(entries);
+exports.iteratePaginatedAPI = iteratePaginatedAPI;
+/**
+ * Collect all of the results of paginating an API into an in-memory array.
+ *
+ * Example (given a notion Client called `notion`):
+ *
+ * ```
+ * const blocks = collectPaginatedAPI(notion.blocks.children.list, {
+ *   block_id: parentBlockId,
+ * })
+ * // Do something with blocks.
+ * ```
+ *
+ * @param listFn A bound function on the Notion client that represents a conforming paginated
+ *   API. Example: `notion.blocks.children.list`.
+ * @param firstPageArgs Arguments that should be passed to the API on the first and subsequent
+ *   calls to the API. Any necessary `next_cursor` will be automatically populated by
+ *   this function. Example: `{ block_id: "<my block id>" }`
+ */
+async function collectPaginatedAPI(listFn, firstPageArgs) {
+    const results = [];
+    for await (const item of iteratePaginatedAPI(listFn, firstPageArgs)) {
+        results.push(item);
+    }
+    return results;
 }
-exports.pick = pick;
-function isObject(o) {
-    return typeof o === "object" && o !== null;
+exports.collectPaginatedAPI = collectPaginatedAPI;
+/**
+ * @returns `true` if `response` is a full `BlockObjectResponse`.
+ */
+function isFullBlock(response) {
+    return "type" in response;
 }
-exports.isObject = isObject;
+exports.isFullBlock = isFullBlock;
+/**
+ * @returns `true` if `response` is a full `PageObjectResponse`.
+ */
+function isFullPage(response) {
+    return "url" in response;
+}
+exports.isFullPage = isFullPage;
+/**
+ * @returns `true` if `response` is a full `DatabaseObjectResponse`.
+ */
+function isFullDatabase(response) {
+    return "title" in response;
+}
+exports.isFullDatabase = isFullDatabase;
+/**
+ * @returns `true` if `response` is a full `UserObjectResponse`.
+ */
+function isFullUser(response) {
+    return "type" in response;
+}
+exports.isFullUser = isFullUser;
+/**
+ * @returns `true` if `response` is a full `CommentObjectResponse`.
+ */
+function isFullComment(response) {
+    return "created_by" in response;
+}
+exports.isFullComment = isFullComment;
 //# sourceMappingURL=helpers.js.map
 
 /***/ }),
@@ -2926,7 +3054,7 @@ exports.isObject = isObject;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.isNotionClientError = exports.RequestTimeoutError = exports.UnknownHTTPResponseError = exports.APIResponseError = exports.ClientErrorCode = exports.APIErrorCode = exports.LogLevel = exports.Client = void 0;
+exports.isFullComment = exports.isFullUser = exports.isFullPage = exports.isFullDatabase = exports.isFullBlock = exports.iteratePaginatedAPI = exports.collectPaginatedAPI = exports.isNotionClientError = exports.RequestTimeoutError = exports.UnknownHTTPResponseError = exports.APIResponseError = exports.ClientErrorCode = exports.APIErrorCode = exports.LogLevel = exports.Client = void 0;
 var Client_1 = __nccwpck_require__(6492);
 Object.defineProperty(exports, "Client", ({ enumerable: true, get: function () { return Client_1.default; } }));
 var logging_1 = __nccwpck_require__(2096);
@@ -2939,6 +3067,14 @@ Object.defineProperty(exports, "UnknownHTTPResponseError", ({ enumerable: true, 
 Object.defineProperty(exports, "RequestTimeoutError", ({ enumerable: true, get: function () { return errors_1.RequestTimeoutError; } }));
 // Error helpers
 Object.defineProperty(exports, "isNotionClientError", ({ enumerable: true, get: function () { return errors_1.isNotionClientError; } }));
+var helpers_1 = __nccwpck_require__(5682);
+Object.defineProperty(exports, "collectPaginatedAPI", ({ enumerable: true, get: function () { return helpers_1.collectPaginatedAPI; } }));
+Object.defineProperty(exports, "iteratePaginatedAPI", ({ enumerable: true, get: function () { return helpers_1.iteratePaginatedAPI; } }));
+Object.defineProperty(exports, "isFullBlock", ({ enumerable: true, get: function () { return helpers_1.isFullBlock; } }));
+Object.defineProperty(exports, "isFullDatabase", ({ enumerable: true, get: function () { return helpers_1.isFullDatabase; } }));
+Object.defineProperty(exports, "isFullPage", ({ enumerable: true, get: function () { return helpers_1.isFullPage; } }));
+Object.defineProperty(exports, "isFullUser", ({ enumerable: true, get: function () { return helpers_1.isFullUser; } }));
+Object.defineProperty(exports, "isFullComment", ({ enumerable: true, get: function () { return helpers_1.isFullComment; } }));
 //# sourceMappingURL=index.js.map
 
 /***/ }),
@@ -2950,7 +3086,7 @@ Object.defineProperty(exports, "isNotionClientError", ({ enumerable: true, get: 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.logLevelSeverity = exports.makeConsoleLogger = exports.LogLevel = void 0;
-const helpers_1 = __nccwpck_require__(5682);
+const utils_1 = __nccwpck_require__(8769);
 var LogLevel;
 (function (LogLevel) {
     LogLevel["DEBUG"] = "debug";
@@ -2978,11 +3114,42 @@ function logLevelSeverity(level) {
         case LogLevel.ERROR:
             return 80;
         default:
-            return (0, helpers_1.assertNever)(level);
+            return (0, utils_1.assertNever)(level);
     }
 }
 exports.logLevelSeverity = logLevelSeverity;
 //# sourceMappingURL=logging.js.map
+
+/***/ }),
+
+/***/ 8769:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.isObject = exports.pick = exports.assertNever = void 0;
+/**
+ * Utility for enforcing exhaustiveness checks in the type system.
+ *
+ * @see https://basarat.gitbook.io/typescript/type-system/discriminated-unions#throw-in-exhaustive-checks
+ *
+ * @param value The variable with no remaining values
+ */
+function assertNever(value) {
+    throw new Error(`Unexpected value should never occur: ${value}`);
+}
+exports.assertNever = assertNever;
+function pick(base, keys) {
+    const entries = keys.map(key => [key, base === null || base === void 0 ? void 0 : base[key]]);
+    return Object.fromEntries(entries);
+}
+exports.pick = pick;
+function isObject(o) {
+    return typeof o === "object" && o !== null;
+}
+exports.isObject = isObject;
+//# sourceMappingURL=utils.js.map
 
 /***/ }),
 
@@ -9919,7 +10086,7 @@ module.exports = require("zlib");
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"@notionhq/client","version":"1.0.4","description":"A simple and easy to use client for the Notion API","engines":{"node":">=12"},"homepage":"https://developers.notion.com/docs/getting-started","bugs":{"url":"https://github.com/makenotion/notion-sdk-js/issues"},"repository":{"type":"git","url":"https://github.com/makenotion/notion-sdk-js/"},"keywords":["notion","notionapi","rest","notion-api"],"main":"./build/src","types":"./build/src/index.d.ts","scripts":{"prepare":"npm run build","prepublishOnly":"npm run checkLoggedIn && npm run lint && npm run test","build":"tsc","prettier":"prettier --write .","lint":"prettier --check . && eslint . --ext .ts && cspell \'**/*\' ","test":"ava","check-links":"git ls-files | grep md$ | xargs -n 1 markdown-link-check","prebuild":"npm run clean","clean":"rm -rf ./build","checkLoggedIn":"./scripts/verifyLoggedIn.sh"},"author":"","license":"MIT","files":["build/package.json","build/src/**"],"dependencies":{"@types/node-fetch":"^2.5.10","node-fetch":"^2.6.1"},"devDependencies":{"@ava/typescript":"^2.0.0","@typescript-eslint/eslint-plugin":"^4.22.0","@typescript-eslint/parser":"^4.22.0","ava":"^3.15.0","cspell":"^5.4.1","eslint":"^7.24.0","markdown-link-check":"^3.8.7","prettier":"^2.3.0","typescript":"^4.2.4"}}');
+module.exports = JSON.parse('{"name":"@notionhq/client","version":"2.1.1","description":"A simple and easy to use client for the Notion API","engines":{"node":">=12"},"homepage":"https://developers.notion.com/docs/getting-started","bugs":{"url":"https://github.com/makenotion/notion-sdk-js/issues"},"repository":{"type":"git","url":"https://github.com/makenotion/notion-sdk-js/"},"keywords":["notion","notionapi","rest","notion-api"],"main":"./build/src","types":"./build/src/index.d.ts","scripts":{"prepare":"npm run build","prepublishOnly":"npm run checkLoggedIn && npm run lint && npm run test","build":"tsc","prettier":"prettier --write .","lint":"prettier --check . && eslint . --ext .ts && cspell \'**/*\' ","test":"jest ./test","check-links":"git ls-files | grep md$ | xargs -n 1 markdown-link-check","prebuild":"npm run clean","clean":"rm -rf ./build","checkLoggedIn":"./scripts/verifyLoggedIn.sh"},"author":"","license":"MIT","files":["build/package.json","build/src/**"],"dependencies":{"@types/node-fetch":"^2.5.10","node-fetch":"^2.6.1"},"devDependencies":{"@types/jest":"^28.1.4","@typescript-eslint/eslint-plugin":"^4.22.0","@typescript-eslint/parser":"^4.22.0","cspell":"^5.4.1","eslint":"^7.24.0","jest":"^28.1.2","markdown-link-check":"^3.8.7","prettier":"^2.3.0","ts-jest":"^28.0.5","typescript":"^4.2.4"}}');
 
 /***/ }),
 
