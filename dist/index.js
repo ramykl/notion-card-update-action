@@ -222,6 +222,7 @@ const valueFromEvent = (merged, closed) => {
 exports.valueFromEvent = valueFromEvent;
 const notionTypeToPropValue = (type, value) => {
     switch (type) {
+        case 'status':
         case 'select': {
             return { [type]: { name: value } };
         }

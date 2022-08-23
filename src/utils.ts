@@ -45,6 +45,7 @@ const notionTypeToPropValue: (type: string, value: string) => {} = (
   value
 ) => {
   switch (type) {
+    case 'status':
     case 'select': {
       return {[type]: {name: value}}
     }
