@@ -4,10 +4,10 @@ const OnPR = 'on_pr'
 const OnMerge = 'on_merge'
 
 const InputPagePropertyDefault = 'Status'
-const InputPagePropertyTypeDefault = 'select'
-const InputOnPRDefault = 'In progress'
+const InputPagePropertyTypeDefault = 'status'
+const InputOnPRDefault = 'In review'
 
-const CardStatusInProgress = 'In progress'
+const CardStatusInProgress = 'In review'
 const CardStatusDone = 'Done'
 
 export {
