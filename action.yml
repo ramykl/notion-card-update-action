@@ -10,15 +10,15 @@ inputs:
     required: false
     default: 'Status'
   page_property_type:
-    description: 'The notion type of the property to update. Default is "select"'
+    description: 'The notion type of the property to update. Default is "status"'
     required: false
-    default: 'select'
+    default: 'status'
   on_pr:
-    description: 'The value of page-property to be updated on PR event. Default is "In progress"'
+    description: 'The value of page-property to be updated on PR event. Default is "In review"'
     required: false
-    default: 'In progress'
+    default: 'In review'
   on_merge:
-    description: 'The value of page-property to be updated on PR MERGE event. Default is "QA Testing"'
+    description: 'The value of page-property to be updated on PR MERGE event. Default is "Done"'
     required: false
     default: 'Done'
 runs:

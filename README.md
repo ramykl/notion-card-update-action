@@ -16,10 +16,12 @@ of the Card is extracted from the URL.
 
 ## Inputs
 
-| Key           | Description                                                                                              |
-| ------------- | -------------------------------------------------------------------------------------------------------- |
-| page_property | The name of the property to update. This property must be already created in Notion. Default is "Status" |
-| on_pr         | The value of PAGE_PROPERTY to be updated on PR event. Default is "Code Review"                           |
+| Key                | Description                                                                                              |
+| ------------------ | -------------------------------------------------------------------------------------------------------- |
+| page_property      | The name of the property to update. This property must be already created in Notion. Default is "Status" |
+| page_property_type | The type of the property to update. Default is "status"                                                  |
+| on_pr              | The value of PAGE_PROPERTY to be updated on PR event. Default is "In review"                             |
+| on_merge           | The value of PAGE_PROPERTY to be updated on merge event. Default is "Done"                               |
 
 ## Example usage
 
@@ -47,8 +49,8 @@ jobs:
         uses: ramykl/notion-card-update-action@main
         with:
           page_property: 'Status'
-          page_property_type: 'select'
-          on_pr: 'In progress'
+          page_property_type: 'status'
+          on_pr: 'In review'
           on_merge: 'Done'
         env:
           NOTION_KEY: ---
